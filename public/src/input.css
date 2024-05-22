@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    @apply font-primary bg-slate-950;
+}
+
+.btn {
+    @apply py-3 px-9 font-bold rounded-md border border-lime-500 hover:bg-utama hover:border-lime-500 hover:text-lime-500 transition-all duration-500 capitalize;
+}
