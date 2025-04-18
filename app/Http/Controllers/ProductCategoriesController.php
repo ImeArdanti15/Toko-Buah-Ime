@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProductCategories;
+use Illuminate\Validation\Rule;
 
 class ProductCategoriesController extends Controller
 {
@@ -12,9 +13,8 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
-        return view('dashboard.kategoriproduk.index', [
-            'kategoriproduk' => ProductCategories::all()
-        ]);
+        $kategoriproduk = ProductCategories::all();
+        return view('dashboard.kategoriproduk.index', compact('kategoriproduk'));
     }
 
     /**
@@ -30,7 +30,22 @@ class ProductCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_name' => [
+                'required',
+                'max:255',
+                Rule::unique('product_categories')->ignore($request->id),
+            ],
+        ], [
+            'category_name.unique' => 'The product category name already exists.',
+        ]);
+
+        $data = $request->only(['category_name']);
+
+        ProductCategories::create($data);
+
+        $kategoriproduk = ProductCategories::all();
+       return redirect()->route('kategoriproduk.index');
     }
 
     /**
@@ -44,9 +59,10 @@ class ProductCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $kategoriproduk = ProductCategories::find($id);
+        return view('kategoriproduk.edit', compact('kategoriproduk'));
     }
 
     /**
@@ -54,7 +70,7 @@ class ProductCategoriesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
@@ -62,6 +78,8 @@ class ProductCategoriesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kategoriproduk = ProductCategories::find($id);
+        $kategoriproduk->delete();
+        return redirect()->route('kategoriproduk.index')->with('success', 'Kategori Produk Berhasil Dihapus');
     }
 }

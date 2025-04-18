@@ -13,19 +13,19 @@
 
     <link rel="stylesheet" href="resources/css/app.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="png" href="logo/logotoko.png">
+    <link rel="icon" type="png" href="{{asset('logo/logotoko.png')}}">
 
 </head>
 <body class="text-gray-800 font-inter">
     <!-- start sidebar -->
     <div class="sidebar fixed left-0 top-0 w-64 h-full bg-lime-900 p-4 overflow-x-auto">
         <a href="#" class="flex items-center pb-4 border-b border-b-white">
-            <img src="logo/logotoko.png" alt="" class="w-10 h-10 rounded object-cover">
+            <img src="{{asset('logo/logotoko.png')}}" alt="" class="w-10 h-10 rounded object-cover">
             <span class="text-lg font-bold text-white ml-3"><span class="text-red-500">Me</span>Fresh</span>
         </a>
         <ul class="mt-4 sidebar-dropdown">
             <li class="mb-1 group">
-                <a href="{{route('dashboard')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                <a href="{{route('admin.dashboard')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
                 <i class="fa-solid fa-house mr-3 text-lg"></i>
                 <span class="text-sm">Dashboard</span>
                 </a>
@@ -45,6 +45,12 @@
                 </a>
             </li>
             <h3 class="text-sm text-slate-400 ml-4">Pembelian</h3>
+            <li class="mb-1 group">
+                <a href="{{route('pembelian.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                    <i class="fa-solid fa-basket-shopping mr-3 text-lg"></i>
+                <span class="text-sm">Pembelian</span>
+                </a>
+            </li>
             <li class="mb-1 group">
                 <a href="{{route('pesanan.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
                 <i class="fa-solid fa-store mr-3 text-lg"></i>
@@ -170,6 +176,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">No.</th>
+                                    <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Nama Kategori</th>
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Nama Produk</th>
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Deskripsi</th>
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Harga</th>
@@ -179,7 +186,6 @@
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Gambar 3</th>
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Gambar 4</th>
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Gambar 5</th>
-                                    <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Status</th>
                                     <th class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">Aksi</th>
                                 </tr>
                             </thead>
@@ -187,7 +193,7 @@
                                 <a href="{{route ('barang.create')}}" class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md  active mr-2 hover:text-white"><i class="fa-solid fa-plus"></i> Tambah Produk</a>
                             </div>
                             <tbody>
-                                @foreach ($barang as $idx => $data)
+                                @foreach ($product as $idx => $data)
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
@@ -195,7 +201,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        {{ $data->product_id }}
+                                        {{ $data->category_name }}
                                     </td>
                                     <td>
                                         {{ $data->product_name }}
@@ -210,28 +216,37 @@
                                         {{ $data->stock_quantity }}
                                     </td>
                                     <td>
-                                        {{ $data->image1 }}
+                                        <img src="{{ asset('storage/' . $data->image1) }}" alt="{{ $data->image1 }}"
+                                        class="img-thumbnail">
                                     </td>
                                     <td>
-                                        {{ $data->image2 }}
+                                        <img src="{{ asset('storage/' . $data->image2) }}" alt="{{ $data->image2 }}"
+                                        class="img-thumbnail">
                                     </td>
                                     <td>
-                                        {{ $data->image3 }}
+                                        <img src="{{ asset('storage/' . $data->image3) }}" alt="{{ $data->image3 }}"
+                                        class="img-thumbnail">
                                     </td>
                                     <td>
-                                        {{ $data->image4 }}
+                                        <img src="{{ asset('storage/' . $data->image4) }}" alt="{{ $data->image4 }}"
+                                        class="img-thumbnail">
                                     </td>
                                     <td>
-                                        {{ $data->image5 }}
+                                        <img src="{{ asset('storage/' . $data->image5) }}" alt="{{ $data->image5 }}"
+                                        class="img-thumbnail">
                                     </td>
-                                    <td>
-                                        {{ $data->status }}
-                                    </td>
-                                    <td>
-                                        {{ $data->aktif }}
-                                    </td>
-                                    <td>
-
+                                    <td class="flex ml-3">
+                                        <a href="{{ route('kategoriproduk.edit', $data->id) }}"
+                                            class="text-lime-400 ml-3"><i class="fa-solid fa-pencil"></i></a>
+                                        <form action="{{ route('kategoriproduk.destroy', $data->id) }}" method="post"
+                                            class="flex">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" id="delete"
+                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
+                                                class="text-red-400 ml-3"><i
+                                                    class="fa-solid fa-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

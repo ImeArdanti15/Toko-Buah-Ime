@@ -28,7 +28,7 @@
                         </span>
                     </div>
                 @endif
-                <form action="{{ route('admin.storeRegister') }}" method="post">
+                <form action="{{ route('account.storeRegister') }}" method="post">
                     @csrf
                     <div class="py-4">
                         <span class="mb-2 text-md text-lime-600">Nama</span>
@@ -70,11 +70,11 @@
                         class="w-full bg-lime-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-lime-500 hover:border hover:border-gray-300"
                         type="submit">Daftar</button>
                 </form>
-                <a href="{{ route('admin.login') }}" class="text-center text-lime-500">Sudah punya akun ? Login</a>
+                <a href="{{ route('account.login') }}" class="text-center text-lime-500">Sudah punya akun ? Login</a>
             </div>
 
             <div class="relative">
-                <img src="fruit10.jpeg" alt=""
+                <img src="{{asset('fruit10.jpeg')}}" alt=""
                     class="w-[400px] h-full hidden rounded-r-2xl md:block object-cover">
                 <div
                     class="absolute hidden bottom-10 right-6 p-6 bg-white bg-opacity-30 backdrop-blur-sm rounded drop-shadow-lg md:block">

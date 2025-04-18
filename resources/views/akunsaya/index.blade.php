@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 
@@ -34,24 +35,22 @@
                     <li>
                         <a href="/" class="hover:text-lime-500 transition-all duration-300">Beranda</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="{{ route('tentangkami') }}"
                             class="hover:text-lime-500 transition-all duration-300">Tentang Kami</a>
                     </li>
-                    @if (auth()->check())
                     <li>
                         <a href="{{ route('produk') }}"
                             class="hover:text-lime-500 transition-all duration-300">Produk</a>
-                    </li>
+                    </li> --}}
                     <li>
-                       <a href="/wishlist"
+                        <a href="{{ route('wishlist') }}"
                             class="hover:text-lime-500 transition-all duration-300">Wishlist</a>
                     </li>
                     <li>
-                        <a href="/cart" class="hover:text-lime-500 transition-all duration-300"><i
+                        <a href="" class="hover:text-lime-500 transition-all duration-300"><i
                                 class="fa-solid fa-cart-shopping"></i></a>
                     </li>
-                    @endif
                 </ul>
             </div>
             <!-- end center  -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -51,6 +52,25 @@ class AdminController extends Controller
         Auth::logout();
         return redirect()->route('admin.login')
             ->with('success', 'logged out successfully.');
+    }
+
+    public function register()
+    {
+        return view('front.account.register');
+    }
+
+    public function storeRegister(Request $request)
+    {
+        $data = $request->only([
+            'name',
+            'email',
+            'password',
+        ]);
+
+        User::create($data);
+        session()->flash('success', 'You have been registered succesfully');
+
+        return redirect()->back();
     }
 
 

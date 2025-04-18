@@ -28,7 +28,7 @@
                     </span>
                 </div>
             @endif
-                <form action="{{ route('admin.auth') }}" method="post" id="form">
+                <form action="{{ route('account.auth') }}" method="post" id="form">
                     @csrf
                     <div class="py-4">
                         <span class="mb-2 text-md text-lime-600">Email</span>
@@ -42,10 +42,21 @@
                             class="w-full p-2 border border-lime-500 rounded-md placeholder:font-light placeholder:text-gray-500"
                             placeholder="password">
                     </div>
+                    {{-- <div class="flex justify-between w-full py-4">
+                        <div class="mr-24">
+                            <input type="checkbox" name="ch" id="ch" class="mr-2">
+                            <span class=" text-lime-500 text-md">Ingat Aku</span>
+                        </div>
+                        <a href="#" class="text-lime-500 text-md">Lupa Akun ?</a>
+                    </div> --}}
                     <button
                         class="w-full bg-lime-500 text-white p-2 rounded-lg mb-6 hover:bg-white hover:text-lime-500 hover:border hover:border-gray-300"
                         type="submit">Masuk</button>
                 </form>
+                <div class="text-center text-lime-500">
+                    Tidak Punya Akun?
+                    <a href="{{ route('account.register') }}" class="font-bold text-lime-500">Silahkan Daftar</a>
+                </div>
             </div>
             <div class="relative">
                 <img src="{{ asset('fruit11.jpeg') }}" alt=""

@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Merriweather&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="icon" type="png" href="logotoko.png">
+  <link rel="icon" type="png" href="{{asset('logo/logotoko.png')}}">
 </head>
 <body class="text-lime-500 tracking-wider bg-white">
   <!-- header -->
@@ -31,23 +31,37 @@
           <li>
             <a href="{{route('tentangkami')}}" class="hover:text-lime-500 transition-all duration-300">Tentang Kami</a>
           </li>
+          @if (auth()->check())
           <li>
             <a href="{{route('produk')}}" class="hover:text-lime-500 transition-all duration-300">Produk</a>
           </li>
           <li>
-            <a href="{{route('wishlist')}}" class="hover:text-lime-500 transition-all duration-300">Wishlist</a>
+            <a href="/wishlist" class="hover:text-lime-500 transition-all duration-300">Wishlist</a>
           </li>
           <li>
-            <a href="" class="hover:text-lime-500 transition-all duration-300"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="/cart" class="hover:text-lime-500 transition-all duration-300"><i class="fa-solid fa-cart-shopping"></i></a>
           </li>
+          @endif
         </ul>
       </div>
       <!-- end center  -->
 
       <!-- right -->
       <div class="hidden md:block">
-        <a href="" class="btn bg-lime-500 text-white"><i class="fa-solid fa-right-to-bracket"></i> Masuk</a>
-      </div>
+        @if (auth()->check())
+            <div class="flex items-center space-x-2">
+                {{-- <i class="fa-solid fa-user pr-3 mr-3 text-lg"></i> --}}
+                <p class="text-lime-500 mr-4 pr-3 flex">{{ auth()->user()->name }}</p>
+                <a href="{{ route('account.logout') }}">
+                    <i class="fa-solid fa-right-from-bracket ml-3"></i>
+                </a>
+            </div>
+        @else
+            <a href="{{ route('account.login') }}" class="btn bg-lime-500 text-white">
+                <i class="fa-solid fa-right-to-bracket"></i> Masuk
+            </a>
+        @endif
+    </div>
       <!-- end right -->
 
       <!-- mobile menu -->
@@ -101,7 +115,7 @@
             <a href="{{route('produk')}}" class="btn bg-lime-500 text-white">Pesan Sekarang ! <i class="fa-solid fa-caret-right"></i></a>
           </div>
           <!-- end kiri -->
-          
+
           <!-- kanan -->
           <div class="md:w-1/2 relative">
             <div class="md:h-[340px] rounded-md overflow-hidden">
@@ -186,7 +200,7 @@
     <!-- end table  -->
   </header>
   <!-- end main 2 -->
-  
+
 <p class="text-[13px] text-slate-700 text-center">Oleh karena itu, tidak perlu ragu untuk membeli buah dan sayur di MeFresh. <i class="fa-solid fa-heart"></i></p>
 
   <!-- footer -->

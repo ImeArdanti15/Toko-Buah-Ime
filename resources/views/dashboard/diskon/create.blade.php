@@ -39,6 +39,12 @@
             </li>
             <h3 class="text-sm text-slate-400 ml-4">Pembelian</h3>
             <li class="mb-1 group">
+                <a href="{{route('pembelian.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                    <i class="fa-solid fa-basket-shopping mr-3 text-lg"></i>
+                <span class="text-sm">Pembelian</span>
+                </a>
+            </li>
+            <li class="mb-1 group">
                 <a href="{{route('pesanan.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
                 <i class="fa-solid fa-store mr-3 text-lg"></i>
                 <span class="text-sm">Pesanan</span>

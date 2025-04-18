@@ -13,19 +13,19 @@
 
     <link rel="stylesheet" href="resources/css/app.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="png" href="logo/logotoko.png">
+    <link rel="icon" type="png" href="{{asset('logo/logotoko.png')}}">
 
 </head>
 <body class="text-gray-800 font-inter">
     <!-- start sidebar -->
     <div class="sidebar fixed left-0 top-0 w-64 h-full bg-lime-900 p-4 overflow-x-auto">
         <a href="#" class="flex items-center pb-4 border-b border-b-white">
-            <img src="../logo/logotoko.png" alt="" class="w-10 h-10 rounded object-cover">
+            <img src="{{asset('logo/logotoko.png')}}" alt="" class="w-10 h-10 rounded object-cover">
             <span class="text-lg font-bold text-white ml-3"><span class="text-red-500">Me</span>Fresh</span>
         </a>
         <ul class="mt-4 sidebar-dropdown">
             <li class="mb-1 group">
-                <a href="{{route('dashboard')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                <a href="#" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
                 <i class="fa-solid fa-house mr-3 text-lg"></i>
                 <span class="text-sm">Dashboard</span>
                 </a>
@@ -33,11 +33,23 @@
             <h3 class="text-sm text-slate-400 ml-4">Pengguna</h3>
             <li class="mb-1 group">
                 <a href="{{route('user.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
-                <i class="fa-solid fa-user mr-3 text-lg"></i>
+                <i class="fa-solid fa-user-tie mr-3 text-lg"></i>
                 <span class="text-sm">Pengguna</span>
                 </a>
             </li>
+            <li class="mb-1 group">
+                <a href="{{route('pelanggan.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                <i class="fa-solid fa-user mr-3 text-lg"></i>
+                <span class="text-sm">Pelanggan</span>
+                </a>
+            </li>
             <h3 class="text-sm text-slate-400 ml-4">Pembelian</h3>
+            <li class="mb-1 group">
+                <a href="{{route('pembelian.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                    <i class="fa-solid fa-basket-shopping mr-3 text-lg"></i>
+                <span class="text-sm">Pembelian</span>
+                </a>
+            </li>
             <li class="mb-1 group">
                 <a href="{{route('pesanan.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
                 <i class="fa-solid fa-store mr-3 text-lg"></i>
@@ -145,19 +157,18 @@
                         <table class="w-full main-w-[540px]">
                             <thead>
                                 <h3 class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md  active mr-2 mb-5 w-[250px]">Menambahkan Kategori Produk</h3>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Nama Produk</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="nama" id="nama">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Kategori</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="kategori" id="kategori">
-                                </div>
+                                <form action="{{ route('kategoriproduk.store') }}" id="frmProduct_Category" method="POST">
+                                @csrf
 
+                                <div class="py-4">
+                                    <span class="mb-2 text-md text-lime-600">Nama Kategori</span>
+                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="category_name" id="category_name" placeholder="Kategori">
+                                </div>
                                 <div class="flex justify-end">
                                 <button class="bg-red-200 text-sm font-medium text-red-600 py-2 px-4 rounded-md hover:text-white  active mr-2 mb-5 w-[100px]">Batal</button>
                                 <button class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md hover:text-white active mr-2 mb-5 w-[100px]">Simpan</button>
                                 </div>
+                            </form>
                             </thead>
                             <tbody>
 
@@ -175,6 +186,32 @@
 
 
     <!-- script -->
+    <script>
+        const btnSave = document.getElementById("save")
+        const form = document.getElementById("frmProduct_Category")
+        const pc = document.getElementById("category_name")
+        const img = document.getElementById("image_url")
+        const slug = document.getElementById("slug")
+
+        function save() {
+            if (pc.value === "") {
+                pc.focus()
+                swal("Incomplete Data", "Product Category must be selected!", "error")
+            } else if (img.value === "") {
+                img.focus()
+                swal("Incomplete Data", "First Image is required!", "error")
+            } else if (slug.value === "") {
+                slug.focus()
+                swal("Incomplete Data", "Slug is required!", "error")
+            }else {
+                form.submit();
+            }
+        }
+
+        btnSave.onclick = function(){
+            save()
+        }
+    </script>
     <!-- sidebar -->
     <script src="../resources/js/script.js"></script>
     <!-- end script -->

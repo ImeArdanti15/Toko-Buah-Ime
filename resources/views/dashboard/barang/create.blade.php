@@ -13,19 +13,19 @@
 
     <link rel="stylesheet" href="resources/css/app.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="png" href="logo/logotoko.png">
+    <link rel="icon" type="png" href="{{asset('logo/logotoko.png')}}">
 
 </head>
 <body class="text-gray-800 font-inter">
     <!-- start sidebar -->
     <div class="sidebar fixed left-0 top-0 w-64 h-full bg-lime-900 p-4 overflow-x-auto">
         <a href="#" class="flex items-center pb-4 border-b border-b-white">
-            <img src="../logo/logotoko.png" alt="" class="w-10 h-10 rounded object-cover">
+            <img src="{{asset('logo/logotoko.png')}}" alt="" class="w-10 h-10 rounded object-cover">
             <span class="text-lg font-bold text-white ml-3"><span class="text-red-500">Me</span>Fresh</span>
         </a>
         <ul class="mt-4 sidebar-dropdown">
             <li class="mb-1 group">
-                <a href="{{route('dashboard')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                <a href="{{route('admin.dashboard')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
                 <i class="fa-solid fa-house mr-3 text-lg"></i>
                 <span class="text-sm">Dashboard</span>
                 </a>
@@ -38,6 +38,12 @@
                 </a>
             </li>
             <h3 class="text-sm text-slate-400 ml-4">Pembelian</h3>
+            <li class="mb-1 group">
+                <a href="{{route('pembelian.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
+                    <i class="fa-solid fa-basket-shopping mr-3 text-lg"></i>
+                <span class="text-sm">Pembelian</span>
+                </a>
+            </li>
             <li class="mb-1 group">
                 <a href="{{route('pesanan.index')}}" class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
                 <i class="fa-solid fa-store mr-3 text-lg"></i>
@@ -138,53 +144,100 @@
             <div class="bg-white border border-lime-100 shadow-md shadow-lime-600/100 p-6 rounded-md">
                 <div class="flex justify-between mb-4 items-start">
                     <div class="dropdown">
-                    <button type="button" class="dropdown-toggle text-lime-400"><i class="ri-more-fill"></i></button>
+                    <button type="button" class=" text-lime-400"><i class="ri-more-fill"></i></button>
                 </div>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full main-w-[540px]">
                             <thead>
                                 <h3 class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md  active mr-2 mb-5 w-[200px]">Menambahkan Produk</h3>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Nama Produk</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="name" id="name">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Deskripsi</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="pesanan" id="pesanan">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Harga</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="harga" id="harga">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Jumlah Stok</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="stok" id="stok">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Gambar 1</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="image1" id="image1">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Gambar 2</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="image2" id="image2">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Gambar 3</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="image3" id="image3">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Gambar 4</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="image4" id="image4">
-                                </div>
-                                <div class="py-4">
-                                    <span class="mb-2 text-md text-lime-600">Gambar 5</span>
-                                    <input type="text" class="w-full p-2 border border-lime-500 rounded-md" name="image5" id="image5">
-                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+
+                                            @if (session('success'))
+                                                <div class="alert alert-success">
+                                                    {{ session('success') }}
+                                                </div>
+                                            @endif
+
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+
+                                            <form action="{{ route('barang.store') }}" id="frmProductCreate" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label for="product_category_id" class="form-label text-lime-700">Produk Kategori</label>
+                                                        <select class="form-select text-gray-400 w-full p-2 border border-lime-500 rounded-md mb-3" id="product_category_id" name="product_category_id">
+                                                            <option @if (isset($product_category_id)) selected @endif value="default">Pilih Kategori</option>
+                                                            @foreach ($productCategories as $data)
+                                                                <option value="{{ $data->id }}" @if (isset($product_category_id) and $data->id == $product_category_id) selected @endif>{{ $data->category_name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="product_name" class="text-lime-700">Nama Produk</label>
+                                                        <input type="text" class="form-control w-full p-2 border border-lime-500 rounded-md mb-3" id="product_name" placeholder="Enter the product name" name="product_name" value="{{ old('product_name') }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="desciption" class="form-label text-lime-700">Deskripsi</label>
+                                                        <textarea class="form-control w-full p-2 border border-lime-500 rounded-md mb-2" id="desciption" rows="3" placeholder="A few things about this product" name="desciption">{{ old('desciption') }}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="price" class="text-lime-700">Harga</label>
+                                                        <input type="number" class="form-control w-full p-2 border border-lime-500 rounded-md mb-3" id="price" placeholder="0" name="price" value="{{ old('price') }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="stock_quantity" class="text-lime-700">Stok Barang</label>
+                                                        <input type="number" class="form-control w-full p-2 border border-lime-500 rounded-md mb-3" id="stock_quantity" placeholder="0" name="stock_quantity" value="{{ old('stock_quantity') }}">
+                                                    </div>
+                                                    <div class="form-group w-full p-2 border border-lime-500 rounded-md mb-3">
+                                                            <label for="image1" class="form-label text-lime-700">Foto 1</label>
+                                                            <input type="file" class="form-control" id="image1" name="image1">
+                                                        </div>
+
+                                                        <div class="form-group w-full p-2 border border-lime-500 rounded-md mb-3">
+                                                            <label for="image2" class="form-label text-lime-700">Foto 2</label>
+                                                            <input type="file" class="form-control" id="image2" name="image2">
+                                                        </div>
+
+                                                        <div class="form-group w-full p-2 border border-lime-500 rounded-md mb-3">
+                                                            <label for="image3_url" class="form-label text-lime-700">Foto 3</label>
+                                                            <input type="file" class="form-control" id="image3" name="image3">
+                                                        </div>
+
+                                                        <div class="form-group w-full p-2 border border-lime-500 rounded-md mb-3">
+                                                            <label for="image4_url" class="form-label text-lime-700">Foto 4</label>
+                                                            <input type="file" class="form-control" id="image4" name="image4">
+                                                        </div>
+
+                                                        <div class="form-group w-full p-2 border border-lime-500 rounded-md mb-3">
+                                                            <label for="image5_url" class="form-label text-lime-700">Foto 5</label>
+                                                            <input type="file" class="form-control" id="image5" name="image5">
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hidden Input Fields for Status and Message -->
+                                    <input type="hidden" id="sts" class="form-control" value="{{ $status ?? '' }}" />
+                                    <input type="hidden" id="msg" class="form-control" value="{{ $message ?? '' }}" />
 
                                 <div class="flex justify-end">
                                 <button class="bg-red-200 text-sm font-medium text-red-600 py-2 px-4 rounded-md hover:text-white  active mr-2 mb-5 w-[100px]">Batal</button>
-                                <button class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md hover:text-white active mr-2 mb-5 w-[100px]">Simpan</button>
+                                <button class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md hover:text-white active mr-2 mb-5 w-[100px]" type="button" id="save">Simpan</a>
                                 </div>
                             </thead>
                             <tbody>
@@ -204,8 +257,42 @@
 
 
     <!-- script -->
+    <script>
+        const btnSave = document.getElementById("save")
+        const form = document.getElementById("frmProductCreate")
+        const productCategory = document.getElementById("product_category_id")
+        const prd = document.getElementById("product_name")
+        const desc = document.getElementById("desciption")
+        const prc = document.getElementById("price")
+        const pic = document.getElementById("image1")
+
+        function save(){
+            if(productCategory.value == "default") {
+                productCategory.focus()
+                swal("Incomplete data", "Please choose a the product's category", "error")
+            } else if(prd.value == "") {
+                prd.focus()
+                swal("Incomplete data", "The product name must be filled!", "error")
+            } else if(desc.value == "") {
+                desc.focus()
+                swal("Incomplete data", "Description must be filled!", "error")
+            } else if(prc.value == "") {
+                prc.focus()
+                swal("Incomplete data", "Please set a price!", "error")
+            } else if(pic.value == "") {
+                pic.focus()
+                swal("Incomplete data", "At least one picture must be filled!", "error")
+            } else {
+                form.submit()
+            }
+        }
+        btnSave.onclick = function(){
+            save()
+        }
+
+    </script>
     <!-- sidebar -->
-    <script src="../resources/js/script.js"></script>
+    {{-- <script src="../resources/js/script.js"></script> --}}
     <!-- end script -->
 </body>
 </html>

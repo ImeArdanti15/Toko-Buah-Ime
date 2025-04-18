@@ -18,7 +18,7 @@
 
     <link rel="stylesheet" href="resources/css/app.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="png" href="{{asset('logo/logotoko.png')}}">
+    <link rel="icon" type="png" href="{{ asset('logo/logotoko.png') }}">
 
 </head>
 
@@ -26,10 +26,10 @@
     <!-- start sidebar -->
     <div class="sidebar fixed left-0 top-0 w-64 h-full bg-lime-900 p-4 overflow-x-auto">
         <a href="#" class="flex items-center pb-4 border-b border-b-white">
-            <img src="{{asset('logo/logotoko.png')}}" alt="" class="w-10 h-10 rounded object-cover">
+            <img src="{{ asset('logo/logotoko.png') }}" alt="" class="w-10 h-10 rounded object-cover">
             <span class="text-lg font-bold text-white ml-3"><span class="text-red-500">Me</span>Fresh</span>
         </a>
-        <ul class="mt-4">
+        <ul class="mt-4 sidebar-dropdown">
             <li class="mb-1 group">
                 <a href="{{ route('admin.dashboard') }}"
                     class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
@@ -41,7 +41,7 @@
             <li class="mb-1 group">
                 <a href="{{ route('user.index') }}"
                     class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
-                    <i class="fa-solid fa-user-tie  mr-3 text-lg"></i>
+                    <i class="fa-solid fa-user-tie mr-3 text-lg"></i>
                     <span class="text-sm">Pengguna</span>
                 </a>
             </li>
@@ -87,7 +87,7 @@
                     <span class="text-sm">Pembayaran</span>
                 </a>
             </li>
-            <h3 class="text-sm text-slate-400 ml-4">Barang</h3>
+            <h3 class="text-sm text-slate-400 ml-4">Produk</h3>
             <li class="mb-1 group">
                 <a href="{{ route('barang.index') }}"
                     class="flex items-center py-2 px-4 text-white hover:bg-lime-300 rounded-md hover:text-gray-500 group-[.active]:bg-lime-600 group-[.active]:text-white">
@@ -135,7 +135,7 @@
                     <a href="/" class="text-lime-500 hover:text-gray-600">Dashboard</a>
                 </li>
                 <li class="text-lime-600 mr-2 font-medium">/</li>
-                <li class="text-lime-600 mr-2 font-medium">Pelanggan</li>
+                <li class="text-lime-600 mr-2 font-medium">Edit Pengguna</li>
             </ul>
             <ul class="ml-auto flex items-center">
                 <li class="mr-1 dropdown">
@@ -159,18 +159,6 @@
                                     class="fa-solid fa-magnifying-glass absolute top-1/2 left-4 -translate-y-1/2 text-gray-400"></i>
                             </div>
                         </form>
-                        <div class="mt-3 mb-2">
-                            <div class="text-[13px] font-medium text-gray-40 ml-4 mb-2">Pencarian</div>
-                            <ul class="max-h-64 overflow-y-auto">
-                                <li>
-                                    <a href="" class="py-2 px-4 flex items-center hover:bg-lime-50 group">
-                                        <img src="profile1.jpg" alt=""
-                                            class="w-8 h-8 rounded block object-cover align-middle">
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
                     </div>
                 </li>
                 <li class="mr-3 dropdown ">
@@ -182,97 +170,58 @@
             </ul>
         </div>
 
-
         <div class="pt-6 ml-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-[116rem]">
                 <div class="bg-white border border-lime-100 shadow-md shadow-lime-600/100 p-6 rounded-md">
                     <div class="flex justify-between mb-4 items-start">
-                        <div class="">
+                        <div class="dropdown">
                             <button type="button" class="dropdown-toggle text-lime-400"><i
                                     class="ri-more-fill"></i></button>
                         </div>
                     </div>
-
                     <div class="overflow-x-auto">
-                        <table class="w-full main-w-[540px]">
-                            <thead>
-                                <tr>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        No.</th>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Nama</th>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Email</th>
-                                    {{-- <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Password</th> --}}
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Nomor Telepon</th>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Alamat1</th>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Alamat2</th>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Alamat3</th>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Keterangan</th>
-                                    <th
-                                        class="text-[12px] uppercase tracking-wide font-medium text-lime-600 py-2 px-4 bg-lime-50 rounded-md">
-                                        Aksi</th>
-                                </tr>
-                            </thead>
-                            <div class="flex items-center mb-5 order-tab">
-                                <a href="{{ route('pelanggan.create') }}"
-                                    class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md  active mr-2 hover:text-white"><i
-                                        class="fa-solid fa-plus"></i> Tambah Pelanggan</a>
-                            </div>
-                            <tbody>
-                                @foreach ($pelanggan as $idx => $data)
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                {{ $idx + 1 . '. ' }}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            {{ $data->name }}
-                                        </td>
-                                        <td>
-                                            {{ $data->email }}
-                                        </td>
-                                        <td>
-                                            {{ $data->password }}
-                                        </td>
-                                        <td>
-                                            {{ $data->phone }}
-                                        </td>
-                                        <td>
-                                            {{ $data->address1 }}
-                                        </td>
-                                        <td>
-                                            {{ $data->address2 }}
-                                        </td>
-                                        <td>
-                                            {{ $data->address3 }}
-                                        </td>
-                                        <td>
-                                            {{ $data->aktif }}
-                                        </td>
-                                        <td>
+                        <form action="{{ route('user.update', $pengguna->id) }}" method="POST" id="form">
+                            @csrf
+                            @method('PUT')
+                            <table class="w-full main-w-[540px]">
+                                <thead>
+                                    <h3
+                                        class="bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md  active mr-2 mb-5 w-[200px]">
+                                        Edit Pengguna</h3>
+                                    <div class="py-4">
+                                        <span class="mb-2 text-md text-lime-600">Nama</span>
+                                        <input type="text" class="w-full p-2 border border-lime-500 rounded-md"
+                                            name="name" id="name" value="{{ $pengguna->name }}">
+                                    </div>
+                                    <div class="py-4">
+                                        <span class="mb-2 text-md text-lime-600">Email</span>
+                                        <input type="text" class="w-full p-2 border border-lime-500 rounded-md"
+                                            name="email" id="email" value="{{ $pengguna->email }}">
+                                    </div>
+                                    <div class="py-4">
+                                        <span class="mb-2 text-md text-lime-600">Password</span>
+                                        <input type="text" class="w-full p-2 border border-lime-500 rounded-md"
+                                            name="password" id="password">
+                                    </div>
+                                    <div class="py-4">
+                                        <span class="mb-2 text-md text-lime-600">Peran</span>
+                                        <input type="text" class="w-full p-2 border border-lime-500 rounded-md"
+                                            name="role" id="role" value="{{ $pengguna->role }}">
+                                    </div>
+                                    <div class="flex justify-end">
+                                        <button type="button" onclick="cancel()"
+                                            class="bg-red-200 text-sm font-medium text-red-600 py-2 px-4 rounded-md  active mr-2 mb-5 hover:text-white w-[100px]"
+                                            id="batal">Batal</button>
+                                        <button type="submit"
+                                            class="btn bg-lime-200 text-sm font-medium text-lime-600 py-2 px-4 rounded-md  active mr-2 mb-5 hover:text-white w-[100px]"
+                                            id="simpan" name="proses">Simpan</button>
+                                    </div>
+                                </thead>
+                                <tbody>
 
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -282,6 +231,23 @@
     </main>
     <!-- end main -->
 
+
+
+
+
+    <!-- script -->
+    <!-- sidebar -->
+    <script src="../resources/js/script.js"></script>
+    <script>
+        function cancel() {
+            // Reset the form fields
+            document.getElementById("form").reset();
+
+            // Display an alert message
+            alert('Batal Menambahkan Detail Pesanan');
+        }
+    </script>
+    <!-- end script -->
 </body>
 
 </html>
